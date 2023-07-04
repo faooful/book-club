@@ -1,17 +1,29 @@
-* {margin: 0; padding:0; border: 0 none; position: relative;}
+:root { font-family: 'Inter', sans-serif; }
+@supports (font-variation-settings: normal) {
+  :root { font-family: 'Inter var', sans-serif; }
+}
+
+* {margin: 0; padding:0; border: 0 none; position: relative; font-family: 'Inter'; letter-spacing: -.025em;}
 html {
   background: #E1DDD2;
 }
 
+:root { font-family: 'Inter', sans-serif; }
+@supports (font-variation-settings: normal) {
+  :root { font-family: 'Inter var', sans-serif; }
+}
+
 .intro {
-  padding: 24px;
+  padding: 24px 80px;
   margin-bottom: 80px;
   background: #0D0D0C;
   color: #FAFAF9;
   font-size: 64px;
+  font-weight: 500 !important;
 }
 
 .grid-container {
+  margin: 0 80px;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -138,5 +150,10 @@ html {
 
   .intro {
     font-size: 32px;
+    padding: 24px;
+  }
+
+  .grid-container {
+    margin: 0;
   }
 }
