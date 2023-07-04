@@ -1,0 +1,142 @@
+* {margin: 0; padding:0; border: 0 none; position: relative;}
+html {
+  background: #E1DDD2;
+}
+
+.intro {
+  padding: 24px;
+  margin-bottom: 80px;
+  background: #0D0D0C;
+  color: #FAFAF9;
+  font-size: 64px;
+}
+
+.grid-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+ .grid-item {
+  flex-basis: 25%;
+  max-width: 25%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 40px;
+}
+
+.book {
+  display: flex;
+  align-items: flex-start;
+  width: 176px;
+  height: 275px;
+  perspective: 150px;
+  perspective-origin: right center;
+  transform-style: preserve-3d;
+  transform: scaleX(0.88) scaleY(0.95);
+}
+
+.book img {
+  display: block;
+  height: 275px;
+  width: 176px;
+  position: relative;
+  z-index: 6;
+  transform: rotateY(-4deg) translateZ(0px);
+}
+
+.book:before, .book:after {
+  content: '';
+  position: absolute;
+}
+
+.book:before {
+    height: 100%;
+    width: 40px;
+    position: absolute;
+    right: -25px;
+    top: 0%;
+    background: #89221B;
+    z-index: 2;
+    transform: rotateY(-4deg) translateZ(0px);
+}
+.book:after {
+    background: #F5F5F5;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1), 18px 3px 20px rgba(0, 0, 0, 0.25) inset;
+    height: 95%;
+    width: 20px;
+    right: -19px;
+    top: 3%;
+    z-index: 3;  
+    perspective: 5px;
+    transform: rotateY(5deg) translateZ(5px);
+}
+
+.book span {
+    display: block;
+    position: absolute;
+    bottom: 10px;
+    height: 100px;
+    right: -90px;
+    height: 100px;
+    width: 200px;
+    background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.1) 15%);
+    border-radius: 15px;
+    box-shadow: 5px 12px 15px 5px rgba(0, 0, 0, 0.1);
+    transform: rotate(5deg) skew(-40deg);
+    z-index: -1;
+}
+
+.description {
+  position: absolute;
+  width: 110px;
+  right: -150px;
+  text-align: left;
+  font-weight: bold;
+}
+
+.book-title {
+  font-size: 20px;
+  color: #0D0D0C;
+}
+
+.author {
+  font-size: 16px;
+  color: #49515A;
+  margin-bottom: 8px;
+}
+
+.date {
+  display: inline-block;
+  padding: 4px 8px;
+  border: 1px solid #1a1a1a;
+  border-radius: 4px;
+  background: ##E1DDD2;
+}
+
+.in-progress {
+  background: #fff;
+}
+
+@media screen and (max-width: 1100px) {
+  .grid-item {
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+
+  .intro {
+    font-size: 50px;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .grid-item {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+
+  .intro {
+    font-size: 32px;
+  }
+}
