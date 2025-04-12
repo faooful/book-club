@@ -5,173 +5,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Book Club</title>
-    <link rel="stylesheet" href="./styles.css">
+    <!-- Fonts -->
     <link rel="preconnect" href="https://rsms.me/">
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap">
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./header-styles.css">
   </head>
   <body>
+
+    
     <div class="intro">
+
+      <svg viewBox="0 0 1280 720">
+        <mask id="maskLeft">
+          <rect x="-50%" width="100%" height="100%" fill="#fff"/>
+        </mask>
+        <mask id="maskRight">
+          <rect x="50%" width="100%" height="100%" fill="#fff"/>
+        </mask>
+        <g font-size="150">
+          <g mask="url(#maskLeft)" fill="#fff" class="left">
+            <text y="120">REMOTE</text>
+            <text y="250">BOOK</text>
+            <text y="380">CLUB</text>
+          </g>
+          <g mask="url(#maskRight)" fill="#aaa" class="right">
+            <text y="120">REMOTE</text>
+            <text y="250">BOOK</text>
+            <text y="380">CLUB</text>
+          </g>
+        </g>
+      </svg>
+
       <p>Towards the middle of '21 I got together with some friends to start a book club. What started as a way to make remote hang outs more fun, ended up becoming a lasting way I approach literature. This is a collection of the books we have read and discussed.</p>
     </div>
 
-    <div class="grid-container">
+    <ul class="books">
+    </ul>
 
-      <div class="grid-item">
-        <div class="book">
-          <span></span>
-          <img src="https://m.media-amazon.com/images/P/1328915344.01._SCLZZZZZZZ_SX500_.jpg" alt="" />
-          <div class="description">
-            <div class="book-title">Blitzed</div>
-            <div class="author">Norman Ohler</div>
-            <div class="date in-progress">In Progress</div>
-          </div>
-        </div>
-      </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="main.js"></script>
+    <script>
+      // View toggle and navigation logic
+      const viewToggle = document.querySelector('.view-toggle');
+      const container = document.querySelector('.grid-container');
+      const prevButton = document.getElementById('prevBook');
+      const nextButton = document.getElementById('nextBook');
+      const currentBookSpan = document.getElementById('currentBook');
+      const totalBooksSpan = document.getElementById('totalBooks');
+      
+      let currentIndex = 0;
+      const gridItems = Array.from(container.querySelectorAll('.grid-item'));
+      totalBooksSpan.textContent = gridItems.length;
 
-      <div class="grid-item">
-        <div class="book">
-          <span></span>
-          <img src="https://m.media-amazon.com/images/I/41zVmU1laSL.jpg" alt="" />
-          <div class="description">
-            <div class="book-title">Parable of the Sower</div>
-            <div class="author">Octavia E. Butler</div>
-            <div class="date">07/'23</div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="grid-item">
-        <div class="book">
-          <span></span>
-          <img src="https://m.media-amazon.com/images/I/81Xs3j5UqAL._SL1500_.jpg" alt="" />
-          <div class="description">
-            <div class="book-title">Sea of Tranquility</div>
-            <div class="author">Emily St. John Mandel</div>
-            <div class="date">05/‘23</div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="grid-item">
-        <div class="book">
-          <span></span>
-          <img src="https://m.media-amazon.com/images/I/61NxwiDPRcL._SL1000_.jpg" alt="" />
-          <div class="description">
-            <div class="book-title">Mad Honey</div>
-            <div class="author">Katie Welch</div>
-            <div class="date">03/‘23</div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="grid-item">
-        <div class="book">
-          <span></span>
-          <img src="https://m.media-amazon.com/images/I/71PJgcmkUDL._SL1500_.jpg" alt="" />
-          <div class="description">
-            <div class="book-title">Mercury Pictures Presents</div>
-            <div class="author">Anthony Marra</div>
-            <div class="date">12/‘22</div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="grid-item">
-        <div class="book">
-          <span></span>
-          <img src="https://m.media-amazon.com/images/I/81KN5V5lW-L._SL1500_.jpg" alt="" />
-          <div class="description">
-            <div class="book-title">The Paris Apartment</div>
-            <div class="author">Lucy Foley</div>
-            <div class="date">08/‘22</div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="grid-item">
-        <div class="book">
-          <span></span>
-          <img src="https://m.media-amazon.com/images/I/71AethrQRRL._SL1500_.jpg" alt="" />
-          <div class="description">
-            <div class="book-title">Exhalation</div>
-            <div class="author">Ted Chiang</div>
-            <div class="date">06/‘22</div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="grid-item">
-        <div class="book">
-          <span></span>
-          <img src="https://m.media-amazon.com/images/I/81lxD2yoNRL._SL1500_.jpg" alt="" />
-          <div class="description">
-            <div class="book-title">Shoe Dog</div>
-            <div class="author">Phil Knight</div>
-            <div class="date">02/‘22</div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="grid-item">
-        <div class="book">
-          <span></span>
-          <img src="https://m.media-amazon.com/images/I/71vt7-MziKL._SL1500_.jpg" alt="" />
-          <div class="description">
-            <div class="book-title">The Plot</div>
-            <div class="author">Jean Hanff Korelitz</div>
-            <div class="date">01/‘22</div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="grid-item">
-        <div class="book">
-          <span></span>
-          <img src="https://m.media-amazon.com/images/I/81i9WSObJbL._SL1500_.jpg" alt="" />
-          <div class="description">
-            <div class="book-title">This is Going to Hurt</div>
-            <div class="author">Adam Kay</div>
-            <div class="date">11/‘21</div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="grid-item">
-        <div class="book">
-          <span></span>
-          <img src="https://pictures.abebooks.com/isbn/9781101904220-us.jpg" alt="" />
-          <div class="description">
-            <div class="book-title">Dark Matter</div>
-            <div class="author">Blake Crouch</div>
-            <div class="date">09/‘21</div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="grid-item">
-        <div class="book">
-          <span></span>
-          <img src="https://m.media-amazon.com/images/I/71841PgEsnL._SL1500_.jpg" alt="" />
-          <div class="description">
-            <div class="book-title">White Teeth</div>
-            <div class="author">Zadie Smith</div>
-            <div class="date">08/'21</div>
-          </div>
-        </div>
-      </div>
-      
-       <div class="grid-item">
-        <div class="book">
-          <span></span>
-          <img src="https://m.media-amazon.com/images/I/51cY5RgbpOL._SY466_.jpg" alt="" />
-          <div class="description">
-            <div class="book-title">The 7 1/2 Deaths of Evelyn Hardcastle</div>
-            <div class="author">Stuart Turton</div>
-            <div class="date">05/'21</div>
-          </div>
-        </div>
-      </div>
-      
-    </div>
+      // Initialize the first book as active
+      gridItems[0].classList.add('active');
+      updateActiveBook();
+
+      function updateActiveBook() {
+        gridItems.forEach((item, index) => {
+          item.classList.toggle('active', index === currentIndex);
+        });
+        
+        prevButton.disabled = currentIndex === 0;
+        nextButton.disabled = currentIndex === gridItems.length - 1;
+        currentBookSpan.textContent = currentIndex + 1;
+      }
+
+      prevButton.addEventListener('click', () => {
+        if (currentIndex > 0) {
+          currentIndex--;
+          updateActiveBook();
+        }
+      });
+
+      nextButton.addEventListener('click', () => {
+        if (currentIndex < gridItems.length - 1) {
+          currentIndex++;
+          updateActiveBook();
+        }
+      });
+
+      viewToggle.addEventListener('click', () => {
+        container.classList.toggle('stack-view');
+        viewToggle.classList.toggle('stack-active');
+      });
+    </script>
   </body>
 </html>

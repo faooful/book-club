@@ -1,159 +1,170 @@
-:root { font-family: 'Inter', sans-serif; }
+:root { 
+  font-family: 'Inter', sans-serif;
+  --viewport-size: min(37.5vw, 37.5vh);
+  --book-width: calc(var(--viewport-size) * 1.5);
+  --book-height: var(--viewport-size);
+  --spine-width: calc(var(--viewport-size) * 0.16);
+}
+
 @supports (font-variation-settings: normal) {
   :root { font-family: 'Inter var', sans-serif; }
 }
 
-* {margin: 0; padding:0; border: 0 none; position: relative; font-family: 'Inter'; letter-spacing: -.025em;}
+* {margin: 0; padding:0; border: 0 none; position: relative; letter-spacing: -.025em;}
 html {
   background: #E1DDD2;
 }
 
-:root { font-family: 'Inter', sans-serif; }
-@supports (font-variation-settings: normal) {
-  :root { font-family: 'Inter var', sans-serif; }
-}
-
 .intro {
   padding: 24px 80px;
-  margin-bottom: 80px;
+  margin-bottom: 24px;
   background: #0D0D0C;
   color: #FAFAF9;
   font-size: 64px;
   font-weight: 500 !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2em;
 }
 
-.grid-container {
-  margin: 0 80px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+.intro svg {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  height: auto;
+  display: block;
 }
 
- .grid-item {
-  flex-basis: 25%;
-  max-width: 25%;
+.intro p {
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: -200px;
+  padding-bottom: 200px;
+  line-height: 1.4;
+}
+
+.books {
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  margin-bottom: 40px;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: min(10vh, 10vw) 0 min(30vh, 30vw) 0;
+  transform-style: preserve-3d;
 }
 
 .book {
-  display: flex;
-  align-items: flex-start;
-  width: 176px;
-  height: 275px;
-  perspective: 150px;
-  perspective-origin: right center;
-  transform-style: preserve-3d;
-  transform: scaleX(0.88) scaleY(0.95);
-}
-
-.book img {
-  display: block;
-  height: 275px;
-  width: 176px;
   position: relative;
-  z-index: 6;
-  transform: rotateY(-4deg) translateZ(0px);
+  transform-style: preserve-3d;
+  margin-bottom: calc(var(--spine-width) - var(--book-height));
+  transition: all 0.5s ease;
+  cursor: pointer;
+  transform-origin: center center;
 }
 
-.book:before, .book:after {
+.book-cover {
+  background: black;
+  width: var(--book-width);
+  border: 1px solid gray;
+  height: var(--book-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  padding: 1em;
+  box-sizing: border-box;
+}
+
+.book-spine {
+  background: black;
+  color: white;
+  border: 1px solid gray;
+  width: var(--book-height);
+  height: var(--spine-width);
+  backface-visibility: hidden;
+  transform: rotateZ(90deg) rotateX(-90deg);
+  transform-origin: top left;
+  position: absolute;
+  top: 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.book-cover-back {
+  background: black;
+  width: var(--book-width);
+  height: var(--book-height);
+  position: absolute;
+  top: 0;
+  border: 1px solid gray;
+  transform: translateZ(calc(var(--spine-width) * -1));
+}
+
+.book-block {
+  background: lightgray;
+  position: absolute;
+  height: calc(var(--spine-width) * 0.99);
+  width: var(--book-width);
+  top: -6px;
+  transform: rotateX(90deg) translateY(calc(var(--spine-width) / -2)) translateZ(1vw);
+}
+
+.book-block:before {
   content: '';
-  position: absolute;
-}
-
-.book:before {
-    height: 100%;
-    width: 40px;
-    position: absolute;
-    right: -25px;
-    top: 0%;
-    background: #89221B;
-    z-index: 2;
-    transform: rotateY(-4deg) translateZ(0px);
-}
-.book:after {
-    background: #F5F5F5;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1), 18px 3px 20px rgba(0, 0, 0, 0.25) inset;
-    height: 95%;
-    width: 20px;
-    right: -19px;
-    top: 3%;
-    z-index: 3;  
-    perspective: 5px;
-    transform: rotateY(5deg) translateZ(5px);
-}
-
-.book span {
-    display: block;
-    position: absolute;
-    bottom: 10px;
-    height: 100px;
-    right: -90px;
-    height: 100px;
-    width: 200px;
-    background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.1) 15%);
-    border-radius: 15px;
-    box-shadow: 5px 12px 15px 5px rgba(0, 0, 0, 0.1);
-    transform: rotate(5deg) skew(-40deg);
-    z-index: -1;
-}
-
-.description {
-  position: absolute;
-  width: 110px;
-  right: -150px;
-  text-align: left;
-  font-weight: bold;
+  background: lightcoral;
+  height: 16px;
+  width: 150px;
+  display: block;
+  bottom: -10px;
 }
 
 .book-title {
-  font-size: 20px;
-  color: #0D0D0C;
+  font-size: calc(.6rem + min(1.5vw, 1.5vh));
+  transform: rotate(180deg);
+  padding: 0.4em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+  width: 100%;
 }
 
-.author {
-  font-size: 16px;
-  color: #49515A;
-  margin-bottom: 8px;
+.book-title span {
+  display: block;
+  font-size: 0.8em;
+  opacity: 0.8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.date {
-  display: inline-block;
-  padding: 4px 8px;
-  border: 1px solid #1a1a1a;
+.book-date {
+  font-size: 0.7em !important;
+  opacity: 0.6 !important;
+  margin-top: 0.2em;
+}
+
+.book-cover-title {
+  display: none;
+}
+
+.cover-preview {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  width: 200px;
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+  background-color: #E1DDD2;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  opacity: 0;
+  transition: opacity 0.2s ease;
   border-radius: 4px;
-  background: ##E1DDD2;
-}
-
-.in-progress {
-  background: #fff;
-}
-
-@media screen and (max-width: 1100px) {
-  .grid-item {
-    flex-basis: 50%;
-    max-width: 50%;
-  }
-
-  .intro {
-    font-size: 50px;
-  }
-}
-
-@media screen and (max-width: 720px) {
-  .grid-item {
-    flex-basis: 100%;
-    max-width: 100%;
-  }
-
-  .intro {
-    font-size: 32px;
-    padding: 24px;
-  }
-
-  .grid-container {
-    margin: 0;
-  }
+  transform: translate(20px, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
